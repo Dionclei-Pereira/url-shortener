@@ -15,7 +15,7 @@ public class Url {
 	private Long id;
 	
 	private String originalUrl;
-	private String ShortenedUrl;
+	private String shortenedUrl;
 	private Instant creation;
 	private Instant expiresAt;
 	
@@ -25,7 +25,7 @@ public class Url {
 		super();
 		this.id = id;
 		this.originalUrl = originalUrl;
-		ShortenedUrl = shortenedUrl;
+		this.shortenedUrl = shortenedUrl;
 		this.creation = creation;
 		this.expiresAt = expiresAt;
 	}
@@ -47,11 +47,11 @@ public class Url {
 	}
 
 	public String getShortenedUrl() {
-		return ShortenedUrl;
+		return shortenedUrl;
 	}
 
 	public void setShortenedUrl(String shortenedUrl) {
-		ShortenedUrl = shortenedUrl;
+		this.shortenedUrl = shortenedUrl;
 	}
 
 	public Instant getCreation() {
