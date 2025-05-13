@@ -6,4 +6,5 @@ public interface UrlService {
 	
 	Url findByShortenedUrl(String url);
 	
+	Url generateUrl(String originalUrl);
 }
