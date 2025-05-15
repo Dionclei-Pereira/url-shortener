@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import me.dionclei.url_shortener.entities.Url;
 import me.dionclei.url_shortener.entities.User;
+import me.dionclei.url_shortener.enums.UserRole;
 import me.dionclei.url_shortener.repositories.UrlRepository;
 import me.dionclei.url_shortener.repositories.UserRepository;
 
@@ -25,7 +26,7 @@ public class ConfigRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		if (userRepository.findByEmail("dionclei2@gmail.com") == null) {
 			
-			User user1 = new User(null, "12345678", "dionclei2@gmail.com", null);
+			User user1 = new User(null,"Dionclei",  "12345678", "dionclei2@gmail.com", null, UserRole.ADMIN);
 			userRepository.save(user1);
 		
 			Url url = new Url(null, user1,
