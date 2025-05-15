@@ -28,13 +28,9 @@ public class UrlController {
 	public ResponseEntity<Void> getUrl(@PathVariable String url) {
 		var urlObj = urlService.findByShortenedUrl(url);
 		
-		if (urlObj != null) {
-			HttpHeaders headers = new HttpHeaders();
-			headers.add("Location", urlObj.getOriginalUrl());
-			return new ResponseEntity<>(headers, HttpStatus.FOUND);
-		}
-		
-		return ResponseEntity.notFound().build();
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Location", urlObj.getOriginalUrl());
+		return new ResponseEntity<>(headers, HttpStatus.FOUND);
 	}
 	
 	@PostMapping

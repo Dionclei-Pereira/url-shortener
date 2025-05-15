@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTDecodeException;
 
 import me.dionclei.url_shortener.entities.User;
+import me.dionclei.url_shortener.exceptions.TokenException;
 import me.dionclei.url_shortener.services.interfaces.TokenService;
 
 /**
@@ -32,8 +34,8 @@ public class TokenServiceHMAC implements TokenService {
 					.build()
 					.verify(token)
 					.getSubject();
-		} catch (Exception e) {
-			return null;
+		} catch (JWTDecodeException e) {
+			throw new TokenException(e.getMessage());
 		}
 	}
 

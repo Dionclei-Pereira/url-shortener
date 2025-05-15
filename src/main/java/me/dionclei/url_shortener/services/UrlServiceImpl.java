@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import me.dionclei.url_shortener.entities.Url;
+import me.dionclei.url_shortener.exceptions.ResourceNotFoundException;
+import me.dionclei.url_shortener.exceptions.UrlException;
 import me.dionclei.url_shortener.repositories.UrlRepository;
 import me.dionclei.url_shortener.services.interfaces.UrlService;
 
@@ -27,7 +29,7 @@ public class UrlServiceImpl implements UrlService {
 	private UrlRepository repository;
 
 	public Url findByShortenedUrl(String url) {
-		return repository.findByShortenedUrl(url);
+		return repository.findByShortenedUrl(url).orElseThrow(() -> new ResourceNotFoundException("Url not found"));
 	}
 
 	public Url generateUrl(String originalUrl) {
@@ -59,7 +61,7 @@ public class UrlServiceImpl implements UrlService {
 	        // Return the first characters as the shortened URL
 	        return encoded.substring(0, 7);
 	    } catch (NoSuchAlgorithmException e) {
-	        throw new RuntimeException(e.getMessage());
+	        throw new UrlException(e.getMessage());
 	    }
 	}
 
