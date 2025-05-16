@@ -8,14 +8,17 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Base64;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import me.dionclei.url_shortener.dto.GenericPage;
 import me.dionclei.url_shortener.entities.Url;
 import me.dionclei.url_shortener.exceptions.ResourceNotFoundException;
 import me.dionclei.url_shortener.exceptions.UrlException;
 import me.dionclei.url_shortener.repositories.UrlRepository;
 import me.dionclei.url_shortener.services.interfaces.UrlService;
+import me.dionclei.url_shortener.services.interfaces.UserService;
 
 /**
  * This class is the main implementation of UrlService, it
@@ -25,16 +28,29 @@ import me.dionclei.url_shortener.services.interfaces.UrlService;
 @Service
 public class UrlServiceImpl implements UrlService {
 	
-	@Autowired
 	private UrlRepository repository;
+	private UserService userService;
+	
+	public UrlServiceImpl(UrlRepository repository, UserService userService) {
+		this.repository = repository;
+		this.userService = userService;
+	}
 
 	public Url findByShortenedUrl(String url) {
 		return repository.findByShortenedUrl(url).orElseThrow(() -> new ResourceNotFoundException("Url not found"));
 	}
 
-	public Url generateUrl(String originalUrl) {
+	public GenericPage<Url> getAllUrls(String userEmail, Integer page) {
+		Pageable pageable = PageRequest.of(page, 10);
+		var user = userService.findByEmail(userEmail);
+		var p = repository.findByUserId(user.get().getId(), pageable);
+		return new GenericPage<Url>(p);
+	}
+	
+	public Url generateUrl(String originalUrl, String userEmail) {
 		Url url = new Url();
-		
+		var user = userService.findByEmail(userEmail);
+		url.setUser(user.get());
 		url.setCreation(Instant.now());
 		url.setExpiresAt(generateExpiresAt());
 		url.setOriginalUrl(originalUrl);

@@ -1,5 +1,6 @@
 package me.dionclei.url_shortener.services.interfaces;
 
+import me.dionclei.url_shortener.dto.GenericPage;
 import me.dionclei.url_shortener.entities.Url;
 
 /**
@@ -21,7 +22,18 @@ public interface UrlService {
 	 * and then uses that ID to generate a unique shortened URL.
 	 * 
 	 * @param originalUrl the original long URL
+	 * @param userEmail the email that the URL will be added to
 	 * @return the saved Url entity with a shortened URL
 	 */
-	Url generateUrl(String originalUrl);
+	Url generateUrl(String originalUrl, String userEmail);
+	
+	/**
+	 * Retrieves a genericPage from all URLs that
+	 * a user created
+	 * 
+	 * @param userEmail the user's email
+	 * @param page the current page
+	 * @return a generic page with all URLs
+	 */
+	GenericPage<Url> getAllUrls(String userEmail, Integer page);
 }
