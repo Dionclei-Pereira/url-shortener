@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
@@ -38,8 +39,9 @@ public class TokenServiceHMAC implements TokenService {
 			throw new TokenException(e.getMessage());
 		}
 	}
-
+	
 	@Override
+	@Cacheable(value = "generateToken", key = "#user.id")
 	public String generateToken(User user) {
 		try {
 			Algorithm algorithm = Algorithm.HMAC256(key);

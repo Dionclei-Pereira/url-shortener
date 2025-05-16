@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Base64;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,11 +37,13 @@ public class UrlServiceImpl implements UrlService {
 		this.repository = repository;
 		this.userService = userService;
 	}
-
+	
+	@Cacheable(value = "urlByShortened", key = "#url")
 	public Url findByShortenedUrl(String url) {
 		return repository.findByShortenedUrl(url).orElseThrow(() -> new ResourceNotFoundException("Url not found"));
 	}
-
+	
+	@Cacheable(value = "allUrls", key = "#userEmail + '_' + #page")
 	public GenericPage<Url> getAllUrls(String userEmail, Integer page) {
 		Pageable pageable = PageRequest.of(page, 10);
 		var user = userService.findByEmail(userEmail);
@@ -47,6 +51,7 @@ public class UrlServiceImpl implements UrlService {
 		return new GenericPage<Url>(p);
 	}
 	
+	@CacheEvict(value = "allUrls", allEntries = true)
 	public Url generateUrl(String originalUrl, String userEmail) {
 		Url url = new Url();
 		var user = userService.findByEmail(userEmail);
