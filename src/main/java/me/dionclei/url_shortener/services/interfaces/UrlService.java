@@ -36,4 +36,9 @@ public interface UrlService {
 	 * @return a generic page with all URLs
 	 */
 	GenericPage<Url> getAllUrls(String userEmail, Integer page);
+	
+	/**
+	 * This method clears all expired URLs
+	 */
+	void clean();
 }

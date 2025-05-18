@@ -89,4 +89,8 @@ public class UrlServiceImpl implements UrlService {
 	private Instant generateExpiresAt() {
 		return LocalDateTime.now().plusDays(7).toInstant(ZoneOffset.UTC);
 	}
+
+	public void clean() {
+		this.repository.deleteExpired();
+	}
 }
