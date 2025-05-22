@@ -28,6 +28,15 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/url_shortener
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: password
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: frontend
+    ports:
+      - "80:80"
+    networks:
+      - url
 
 networks:
   url:
