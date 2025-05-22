@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../interfaces/auth-service/login-request.interface';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { LoginResponse } from '../interfaces/auth-service/login-response.interface';
 import { registerRequest } from '../interfaces/auth-service/register-request.interface';
 
@@ -39,7 +39,7 @@ export class AuthService {
 
   isLoggedIn(): Observable<boolean> {
     const token = this.getToken();
-    if (!token) return new Observable(sub => sub.next(false));
+    if (!token) return of(false);
     return this.http.get<boolean>(`${this.apiUrl}/isvalid`, {
       headers: { Authorization: `${token}` },
     });
