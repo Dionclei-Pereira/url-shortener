@@ -21,4 +21,11 @@ public interface TokenService {
 	 * @return a unique token
 	 */
 	String generateToken(User user);
+	
+	/**
+	 * 
+	 * @param token the generated token to validate
+	 * @return a boolean
+	 */
+	Boolean isValid(String token);
 }

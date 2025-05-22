@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login-component/login-component.component';
+import { AuthComponent } from './auth/auth-component/auth-component.component';
 import { HomeComponent } from './home/home-component/home-component.component';
 
 @NgModule({
     declarations: [
-        LoginComponent,
+        AuthComponent,
         HomeComponent
     ],
     imports: [ CommonModule ],
     exports: [
-        LoginComponent,
+        AuthComponent,
         HomeComponent
     ],
     providers: [],
