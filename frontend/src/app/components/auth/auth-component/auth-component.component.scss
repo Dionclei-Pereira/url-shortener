@@ -1,0 +1,26 @@
+.auth {
+    width: 550px;
+    height: 450px;
+
+    gap: 15px;
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  padding-right: 40px;
+}
+
+.password-wrapper img {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+  opacity: 0.6;
+}

@@ -11,7 +11,7 @@ import { registerRequest } from '../interfaces/auth-service/register-request.int
 })
 export class AuthService {
 
-  private apiUrl = 'http://backend:8080/auth'
+  private apiUrl = '/api/auth'
 
   constructor(private readonly http: HttpClient, private readonly router: Router) { }
 

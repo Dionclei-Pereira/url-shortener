@@ -1,1 +1,22 @@
-<p>login-component works!</p>
+<div class="d-flex vh-100 justify-content-center align-items-center">
+    <div class="auth bg-primary rounded rounded-5 p-5 text-center">
+        <p class="h1 text-secondary mb-3">
+            Url Shortener
+        </p>
+        <p class="text-light mb-4">
+            Shorten, share and manage your links with ease.
+        </p>
+        <form class="w-100">
+            <input #emailInput type="email" class="form-control mb-3" placeholder="Email">
+            <div class="password-wrapper mb-4">
+                <input #passwordInput type="password" class="form-control" placeholder="Password">
+                <img [src]="`icons/${img}.png`" (click)="togglePassword()">
+            </div>
+            <p *ngIf="err" class="text-danger">- Invalid email or passowrd</p>
+            <button type="button" class="btn btn-light w-100 mb-2" (click)="onLogin(emailInput.value)">Login</button>
+            <div class="text-light mb-2">
+                Don't have an account? <a href="#" class="text-warning">Register</a>
+            </div>
+        </form>
+    </div>
+</div>

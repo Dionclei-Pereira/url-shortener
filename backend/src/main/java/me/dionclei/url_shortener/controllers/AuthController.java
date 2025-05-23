@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpServletRequest;
 import me.dionclei.url_shortener.dto.LoginRequest;
 import me.dionclei.url_shortener.dto.LoginResponse;
 import me.dionclei.url_shortener.dto.RegisterRequest;
@@ -58,5 +60,11 @@ public class AuthController {
 		}
 		
 		return ResponseEntity.badRequest().build();
+	}
+	
+	@GetMapping("isvalid")
+	public ResponseEntity<Boolean> isValid(HttpServletRequest request) {
+		String token = request.getHeader("Authorization");
+		return ResponseEntity.ok().body(tokenService.isValid(token));
 	}
 }

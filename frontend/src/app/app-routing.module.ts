@@ -3,11 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home-component/home-component.component';
 import { AuthComponent } from './components/auth/auth-component/auth-component.component';
 import { AuthGuard } from './interceptors/auth.guard';
+import { TokenGuard } from './interceptors/token.guard';
 
 const routes: Routes = [
-  {path: 'auth', component: AuthComponent },
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  { path: '', redirectTo: 'auth', pathMatch: 'full' }
+  { path: 'auth', canActivate: [TokenGuard],
+    children: [
+      { path: 'login', component: AuthComponent },
+      { path: '', redirectTo: 'login', pathMatch: 'full' }
+    ]},
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'auth/login'}
 ];
 
 @NgModule({
