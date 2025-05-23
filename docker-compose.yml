@@ -37,6 +37,8 @@ services:
       - "80:80"
     networks:
       - url
+    depends_on:
+      - backend
 
 networks:
   url:

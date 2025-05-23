@@ -9,7 +9,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         const token = this.auth.getToken();
-        
+
         if (token) {
             req.headers.set('authorization', token);
         }

@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './auth-component.component.scss'
 })
 export class AuthComponent {
-
+  
 }

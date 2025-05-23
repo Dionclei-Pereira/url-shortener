@@ -39,6 +39,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         var token = request.getHeader("Authorization");
+        System.out.println("token: " + token);
 
         if (token != null) {
             try {
