@@ -15,10 +15,9 @@ export class AuthComponent {
   password!: ElementRef<HTMLInputElement>;
 
   img: 'eye' | 'hidden' = 'hidden';
-
-  constructor(private render: Renderer2, private auth: AuthService, private router: Router) { }
-
   err: boolean = false;
+  
+  constructor(private render: Renderer2, private auth: AuthService, private router: Router) { }
 
   togglePassword(): void {
     if (this.img === 'eye') {
@@ -30,13 +29,17 @@ export class AuthComponent {
     this.render.setProperty(this.password.nativeElement, 'type', 'text');
   }
 
-  onLogin(email: string) {
+  onLogin(email: string): void {
     this.auth.login({
       email: email,
       password: this.password.nativeElement.value
     }).pipe(take(1), catchError(() => of(this.err = true)))
-      .subscribe((r) => {
+      .subscribe(() => {
         this.router.navigate(['home']);
       })
+  }
+  
+  onRegister(): void {
+    this.router.navigate(['auth/register']);
   }
 }

@@ -14,5 +14,4 @@ export class HomeComponent {
   clear() {
     this.auth.logout();
   }
-
 }

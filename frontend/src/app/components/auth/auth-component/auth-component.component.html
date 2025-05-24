@@ -10,12 +10,12 @@
             <input #emailInput type="email" class="form-control mb-3" placeholder="Email">
             <div class="password-wrapper mb-4">
                 <input #passwordInput type="password" class="form-control" placeholder="Password">
-                <img [src]="`icons/${img}.png`" (click)="togglePassword()">
+                <img appEyeToggle [input]="passwordInput">
             </div>
-            <p *ngIf="err" class="text-danger">- Invalid email or passowrd</p>
+            <p *ngIf="err" class="text-danger">- Invalid credentials</p>
             <button type="button" class="btn btn-light w-100 mb-2" (click)="onLogin(emailInput.value)">Login</button>
             <div class="text-light mb-2">
-                Don't have an account? <a href="#" class="text-warning">Register</a>
+                Don't have an account? <span style="cursor: pointer" class="text-warning" (click)="onRegister()">Register</span>
             </div>
         </form>
     </div>

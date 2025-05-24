@@ -1,0 +1,28 @@
+<div class="d-flex vh-100 justify-content-center align-items-center">
+    <div class="auth bg-primary rounded rounded-5 p-5 text-center">
+        <p class="h1 text-secondary mb-3">
+            Url Shortener
+        </p>
+        <form class="w-100">
+            <input #nameInput type="text" class="form-control mb-3" placeholder="Name">
+            <input #emailInput type="email" class="form-control mb-3" placeholder="Email">
+            <div class="password-wrapper mb-4">
+                <input #passwordInput type="password" class="form-control" placeholder="Password">
+                <img appEyeToggle [input]="passwordInput">
+            </div>
+            <div class="password-wrapper mb-4">
+                <input #confirmPasswordInput type="password" class="form-control" placeholder="Confirm Password">
+                <img appEyeToggle [input]="confirmPasswordInput">
+            </div>
+            <div>
+                <ng-container *ngFor="let err of errs; let i = index">
+                    <p *ngIf="i <= 3" class="text-danger">- {{ err }}</p>
+                </ng-container>
+            </div>
+            <button type="button" class="btn btn-light w-100 mb-2" (click)="onRegister(nameInput.value, emailInput.value, passwordInput.value, confirmPasswordInput.value)">Register</button>
+            <div class="text-light mb-2">
+                Do you already have an account? <span style="cursor: pointer" class="text-warning" (click)="onLogin()">Login</span>
+            </div>
+        </form>
+    </div>
+</div>

@@ -2,9 +2,14 @@ package me.dionclei.url_shortener.controllers;
 
 import java.util.ArrayList;
 
+import org.springframework.core.MethodParameter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import me.dionclei.url_shortener.dto.LoginRequest;
 import me.dionclei.url_shortener.dto.LoginResponse;
 import me.dionclei.url_shortener.dto.RegisterRequest;
@@ -43,13 +49,13 @@ public class AuthController {
 			
 			return ResponseEntity.ok().body(new LoginResponse(token));
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(new LoginResponse(e.getMessage()));
+			return ResponseEntity.badRequest().build();
 		}
 
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<User> register(@RequestBody RegisterRequest request) {
+	public ResponseEntity<User> register(@RequestBody @Valid RegisterRequest request) throws MethodArgumentNotValidException {
 		var userDetails = userRepository.findByEmail(request.email());
 		if (userDetails == null) {
 			var user = new User(null, request.name(), request.password(),
@@ -59,7 +65,13 @@ public class AuthController {
 			return ResponseEntity.ok().body(savedUser);
 		}
 		
-		return ResponseEntity.badRequest().build();
+        BindingResult bindingResult = new BeanPropertyBindingResult(request.email(), "email");
+        bindingResult.addError(new FieldError("email", "email", request.email(), false, null, null, "email must be unique"));
+
+        MethodParameter methodParameter = new MethodParameter(this.getClass().getDeclaredMethods()[0], -1);
+
+        throw new MethodArgumentNotValidException(methodParameter, bindingResult);
+   
 	}
 	
 	@GetMapping("isvalid")
