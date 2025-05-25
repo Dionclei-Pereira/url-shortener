@@ -2,8 +2,6 @@ package me.dionclei.url_shortener.controllers;
 
 import java.security.Principal;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.dionclei.url_shortener.dto.GenericPage;
+import me.dionclei.url_shortener.dto.OriginalUrlResponse;
 import me.dionclei.url_shortener.dto.UrlRequest;
 import me.dionclei.url_shortener.dto.UrlResponse;
 import me.dionclei.url_shortener.entities.Url;
@@ -36,12 +35,9 @@ public class UrlController {
 	}
 	
 	@GetMapping("/{url}")
-	public ResponseEntity<Void> getUrl(@PathVariable String url) {
+	public ResponseEntity<OriginalUrlResponse> getUrl(@PathVariable String url) {
 		var urlObj = urlService.findByShortenedUrl(url);
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Location", urlObj.getOriginalUrl());
-		return new ResponseEntity<>(headers, HttpStatus.FOUND);
+		return ResponseEntity.ok().body(new OriginalUrlResponse(urlObj.getOriginalUrl()));
 	}
 	
 	@PostMapping

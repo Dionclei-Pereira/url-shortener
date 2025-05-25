@@ -8,7 +8,7 @@
                         <tr>
                             <th class="text-success th-md">Shortened URL</th>
                             <th class="text-info d-none d-md-table-cell th-lg">Original URL</th>
-                            <th class="text-warning th-sm">Creation</th>
+                            <th class="text-warning th-sm d-none d-md-table-cell">Creation</th>
                             <th class="text-danger th-sm">Expires</th>
                         </tr>
                     </thead>
@@ -16,8 +16,8 @@
                         <tr *ngFor="let url of page.content">
                             <td><a class="text-info" [href]="url.shortenedUrl">{{ url.shortenedUrl }}</a></td>
                             <td class="d-none d-md-table-cell">{{ url.originalUrl }}</td>
-                            <td>{{ url.creation | date : 'MM/dd/yy' }}</td>
-                            <td>{{ url.expiresAt | date : 'MM/dd/yy' }}</td>
+                            <td class="d-none d-md-table-cell">{{ url.creation | date : 'MM/dd' }}</td>
+                            <td>{{ url.expiresAt | date : 'MM/dd' }}</td>
                         </tr>
                     </tbody>
                 </table>

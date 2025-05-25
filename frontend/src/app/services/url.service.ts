@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Url } from '../interfaces/url-service/url-response.interface';
 import { HttpClient } from '@angular/common/http';
 import { genericPage } from '../interfaces/generic-page.interface';
+import { originalUrl } from '../interfaces/url-service/original-url.response.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -21,5 +22,9 @@ export class UrlService {
         return this.http.get<genericPage<Url>>(this.apiUrl, {
             params: { 'page': page.toString() }
         })
+    }
+
+    getOriginalUrl(code: string): Observable<originalUrl> {
+        return this.http.get<originalUrl>(`${this.apiUrl}/${code}`);
     }
 }

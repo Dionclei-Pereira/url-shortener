@@ -7,7 +7,7 @@ table {
   width: 100%;
 }
 
-th, td {
+td {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
@@ -28,11 +28,11 @@ th, td {
 
 @media (max-width: 767.98px) {
   .th-md {
-    width: 58%;
+    width: 75%;
   }
 
   .th-sm {
-    width: 21%;
+    width: 25%;
   }
 }
 

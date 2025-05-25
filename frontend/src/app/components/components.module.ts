@@ -7,6 +7,8 @@ import { EyeToggleDirective } from './auth/directives/eye-toggle.directive';
 import { FormsModule } from '@angular/forms';
 import { HomeGenerateLinkComponent } from './home/home-generate-link/home-generate-link.component';
 import { HomeMyLinksComponent } from './home/home-my-links/home-my-links.component';
+import { RedirectComponent } from './redirect/redirect.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
     declarations: [
@@ -14,7 +16,9 @@ import { HomeMyLinksComponent } from './home/home-my-links/home-my-links.compone
         HomeComponent,
         AuthRegisterComponent,
         HomeGenerateLinkComponent,
-        HomeMyLinksComponent
+        HomeMyLinksComponent,
+        RedirectComponent,
+        NotFoundComponent
     ],
     imports: [ 
         CommonModule,
