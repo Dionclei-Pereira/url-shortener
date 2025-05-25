@@ -1,3 +1,22 @@
-<p class="text-primary">home-component works!</p>
+<div class="home w-100 h-100 d-flex flex-column">
+    <p class="h1 text-center my-3 text-secondary">URL SHORTENER</p>
+    <div class="btn-group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="0" [(ngModel)]="tab">
+        <label class="btn btn-outline-primary" for="btnradio1">Generate link</label>
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="1" [(ngModel)]="tab">
+        <label class="btn btn-outline-primary" for="btnradio2">My links</label>
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" value="2" [(ngModel)]="tab">
+        <label class="btn btn-outline-primary" for="btnradio3">About</label>
+    </div>
+    <div class="home__container">
+        <div *ngIf="tab == 0">
+            <app-home-generate-link></app-home-generate-link>
+        </div>
+        <div *ngIf="tab == 1">
 
-<button (click)="clear()">clear</button>
+        </div>
+        <div *ngIf="tab == 2">
+
+        </div>
+    </div>
+</div>

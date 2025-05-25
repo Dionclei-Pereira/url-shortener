@@ -11,7 +11,7 @@ import { registerRequest } from '../interfaces/auth-service/register-request.int
 })
 export class AuthService {
 
-  private apiUrl = '/api/auth'
+  private readonly apiUrl = '/api/auth'
 
   constructor(private readonly http: HttpClient, private readonly router: Router) { }
 

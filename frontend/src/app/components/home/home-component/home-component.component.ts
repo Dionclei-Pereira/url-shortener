@@ -9,9 +9,9 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class HomeComponent {
 
-  constructor(private auth: AuthService) {}
+  tab: number = 0;
 
-  clear() {
-    this.auth.logout();
+  onClick() {
+    console.log(this.tab);
   }
 }

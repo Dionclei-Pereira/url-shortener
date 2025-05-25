@@ -39,7 +39,6 @@ public class SecurityFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         var token = request.getHeader("Authorization");
-
         if (token != null) {
             try {
                 var subject = service.validateToken(token);
