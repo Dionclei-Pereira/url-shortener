@@ -1,9 +1,9 @@
 <div class="h-75">
     <ng-container *ngIf="page; else loading;">
         <ng-container *ngIf="page.content.length > 0; else noContent">
-            <div class="table-container">
+            <div class="table-container border border-2 border-black rounded rounded-1">
                 <table
-                    class="table table-primary text-center table-striped table-responsive table-hover table-bordered">
+                    class="table text-center table-striped table-responsive table-hover table-bordered">
                     <thead>
                         <tr>
                             <th class="text-success th-md">Shortened URL</th>
@@ -14,8 +14,8 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let url of page.content">
-                            <td><a [href]="url.shortenedUrl">{{ url.shortenedUrl }}</a></td>
-                            <td class="d-none d-md-block">{{ url.originalUrl }}</td>
+                            <td><a class="text-info" [href]="url.shortenedUrl">{{ url.shortenedUrl }}</a></td>
+                            <td class="d-none d-md-table-cell">{{ url.originalUrl }}</td>
                             <td>{{ url.creation | date : 'MM/dd/yy' }}</td>
                             <td>{{ url.expiresAt | date : 'MM/dd/yy' }}</td>
                         </tr>
