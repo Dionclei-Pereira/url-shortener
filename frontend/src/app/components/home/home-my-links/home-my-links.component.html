@@ -1,0 +1,61 @@
+<div class="h-75">
+    <ng-container *ngIf="page; else loading;">
+        <ng-container *ngIf="page.content.length > 0; else noContent">
+            <div class="table-container">
+                <table
+                    class="table table-primary text-center table-striped table-responsive table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-success th-md">Shortened URL</th>
+                            <th class="text-info d-none d-md-table-cell th-lg">Original URL</th>
+                            <th class="text-warning th-sm">Creation</th>
+                            <th class="text-danger th-sm">Expires</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let url of page.content">
+                            <td><a [href]="url.shortenedUrl">{{ url.shortenedUrl }}</a></td>
+                            <td class="d-none d-md-block">{{ url.originalUrl }}</td>
+                            <td>{{ url.creation | date : 'MM/dd/yy' }}</td>
+                            <td>{{ url.expiresAt | date : 'MM/dd/yy' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <ul class="pagination">
+                    @if (currentPage === 0) {
+                        <li class="page-item disabled">
+                            <p class="page-link">&laquo;</p>
+                        </li>
+                    } @else {
+                        <li class="page-item">
+                            <p class="page-link" (click)="prev()">&laquo;</p>
+                        </li>
+                    }
+                    <li *ngFor="let page of [].constructor(page.totalPages); let i = index" class="page-item" [ngClass]="{'active': currentPage === i}">
+                        <p class="page-link" (click)="goTo(i)">{{ i + 1 }}</p>
+                    </li>
+                    @if (page.hasNext) {
+                        <li class="page-item">
+                            <p class="page-link" (click)="next()">&raquo;</p>
+                        </li>
+                    } @else {
+                        <li class="page-item disabled">
+                            <p class="page-link">&raquo;</p>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </ng-container>
+        <ng-template #noContent>
+            <p class="text-center text-danger h2">You don't have any link</p>
+        </ng-template>
+    </ng-container>
+</div>
+
+<ng-template #loading>
+    <div class="w-100 d-flex justify-content-center mt-5">
+        <div class="spinner-border text-light"></div>
+    </div>
+</ng-template>

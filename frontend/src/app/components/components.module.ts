@@ -6,13 +6,15 @@ import { AuthRegisterComponent } from './auth/auth-register/auth-register.compon
 import { EyeToggleDirective } from './auth/directives/eye-toggle.directive';
 import { FormsModule } from '@angular/forms';
 import { HomeGenerateLinkComponent } from './home/home-generate-link/home-generate-link.component';
+import { HomeMyLinksComponent } from './home/home-my-links/home-my-links.component';
 
 @NgModule({
     declarations: [
         AuthComponent,
         HomeComponent,
         AuthRegisterComponent,
-        HomeGenerateLinkComponent
+        HomeGenerateLinkComponent,
+        HomeMyLinksComponent
     ],
     imports: [ 
         CommonModule,
@@ -23,7 +25,8 @@ import { HomeGenerateLinkComponent } from './home/home-generate-link/home-genera
         AuthComponent,
         HomeComponent,
         HomeGenerateLinkComponent,
-        AuthRegisterComponent
+        AuthRegisterComponent,
+        HomeMyLinksComponent
     ],
     providers: [],
 })
