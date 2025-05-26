@@ -9,6 +9,7 @@ import { HomeGenerateLinkComponent } from './home/home-generate-link/home-genera
 import { HomeMyLinksComponent } from './home/home-my-links/home-my-links.component';
 import { RedirectComponent } from './redirect/redirect.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HomeAboutComponent } from './home/home-about/home-about.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
         HomeGenerateLinkComponent,
         HomeMyLinksComponent,
         RedirectComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        HomeAboutComponent
     ],
     imports: [ 
         CommonModule,
@@ -30,7 +32,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
         HomeComponent,
         HomeGenerateLinkComponent,
         AuthRegisterComponent,
-        HomeMyLinksComponent
+        HomeMyLinksComponent,
+        HomeAboutComponent
     ],
     providers: [],
 })
