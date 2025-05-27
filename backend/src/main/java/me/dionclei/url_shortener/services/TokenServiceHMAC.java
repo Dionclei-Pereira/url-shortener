@@ -75,5 +75,4 @@ public class TokenServiceHMAC implements TokenService {
 	private Instant generateExpiresAt() {
 		return LocalDateTime.now().plusDays(3).toInstant(ZoneOffset.UTC);
 	}
-
 }

@@ -42,6 +42,8 @@ public class UrlController {
 	
 	@PostMapping
 	public ResponseEntity<UrlResponse> generateUrl(@RequestBody UrlRequest request, Principal principal) {
+		if (request.originalUrl() == null) ResponseEntity.ok().body(null);
+		
 		var url = urlService.generateUrl(request.originalUrl(), principal.getName());
 		
 		var response = new UrlResponse(url.getShortenedUrl());
