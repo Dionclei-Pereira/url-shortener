@@ -38,6 +38,7 @@ while the frontend offers an intuitive and responsive user interface.
 - 🔺 Angular 19
 - 🎨 Bootstrap 5
 - 🟦 TypeScript
+- 🔰 Nginx
 - 🐳 Docker & Docker Compose
 
 ## 🎯 **Features**
