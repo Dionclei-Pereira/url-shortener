@@ -21,7 +21,7 @@ export class AuthRegisterComponent {
       this.errs.push("Passwords do not match");
       return;
     }
-    this.auth.register({email: email, password: password, name: name})
+    this.auth.register({ email: email, password: password, name: name })
       .pipe(take(1)).subscribe({
         
         next: (response) => {
