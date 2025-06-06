@@ -1,6 +1,9 @@
 <div class="container mt-5">
     <p class="h3 my-3">Enter your long URL below to shorten it</p>
-    <input [(ngModel)]="originalUrl" class="rounded rounded-3 w-100" placeholder="Long URL" type="text">
-    <button class="btn btn-light text-primary mt-4 w-100" (click)="generateUrl()">Generate</button>
-    <input [(ngModel)]="generatedUrl" disabled class="rounded rounded-3 bg-success-subtle w-100 mt-3" placeholder="Result" type="text">
+    <div class="input-group mb-5">
+        <input [(ngModel)]="originalUrl" class="form-control" placeholder="Paste your long URL here" type="text">
+        <button class="btn btn-outline-light rounded-start rounded-pill" type="button" (click)="generateUrl()">Generate</button>
+    </div>
+    <input [(ngModel)]="generatedUrl" disabled class="rounded rounded-3 bg-light-subtle w-100 mt-3"
+        placeholder="Your short URL will appear here" type="text">
 </div>

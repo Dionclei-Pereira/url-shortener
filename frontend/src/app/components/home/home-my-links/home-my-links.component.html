@@ -1,21 +1,22 @@
-<div class="h-75">
+<div class="h-100 mt-3">
     <ng-container *ngIf="page; else loading;">
         <ng-container *ngIf="page.content.length > 0; else noContent">
-            <div class="table-container border border-2 border-black rounded rounded-1">
-                <table
-                    class="table text-center table-striped table-responsive table-hover table-bordered">
-                    <thead>
+            <div class="table-container border border-2 border-black rounded-3 shadow-sm bg-white">
+                <table class="table text-center table-striped table-responsive table-hover table-bordered">
+                    <thead class="table-dark">
                         <tr>
-                            <th class="text-success th-md">Shortened URL</th>
-                            <th class="text-info d-none d-md-table-cell th-lg">Original URL</th>
-                            <th class="text-warning th-sm d-none d-md-table-cell">Creation</th>
-                            <th class="text-danger th-sm">Expires</th>
+                            <th class="text-success"><i class="bi bi-link-45deg me-1"></i>Shortened</th>
+                            <th class="text-info d-none d-md-table-cell text-truncate"><i
+                                    class="bi bi-globe me-1"></i>Original</th>
+                            <th class="text-warning d-none d-md-table-cell"><i class="bi bi-calendar3 me-1"></i>Created
+                            </th>
+                            <th class="text-danger"><i class="bi bi-clock me-1"></i>Expires</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let url of page.content">
-                            <td><a class="text-info" [href]="url.shortenedUrl">{{ url.shortenedUrl }}</a></td>
-                            <td class="d-none d-md-table-cell">{{ url.originalUrl }}</td>
+                            <td>{{ url.shortenedUrl }}</td>
+                            <td class="d-none d-md-table-cell text-truncate" style="max-width: 250px;" [title]="url.originalUrl">{{ url.originalUrl }}</td>
                             <td class="d-none d-md-table-cell">{{ url.creation | date : 'MM/dd' }}</td>
                             <td>{{ url.expiresAt | date : 'MM/dd' }}</td>
                         </tr>
@@ -25,31 +26,32 @@
             <div class="d-flex justify-content-center mt-3">
                 <ul class="pagination">
                     @if (currentPage === 0) {
-                        <li class="page-item disabled">
-                            <p class="page-link">&laquo;</p>
-                        </li>
+                    <li class="page-item disabled">
+                        <p class="page-link">&laquo;</p>
+                    </li>
                     } @else {
-                        <li class="page-item">
-                            <p class="page-link" (click)="prev()">&laquo;</p>
-                        </li>
+                    <li class="page-item">
+                        <p class="page-link" (click)="prev()">&laquo;</p>
+                    </li>
                     }
-                    <li *ngFor="let page of [].constructor(page.totalPages); let i = index" class="page-item" [ngClass]="{'active': currentPage === i}">
+                    <li *ngFor="let page of [].constructor(page.totalPages); let i = index" class="page-item"
+                        [ngClass]="{'active': currentPage === i}">
                         <p class="page-link" (click)="goTo(i)">{{ i + 1 }}</p>
                     </li>
                     @if (page.hasNext) {
-                        <li class="page-item">
-                            <p class="page-link" (click)="next()">&raquo;</p>
-                        </li>
+                    <li class="page-item">
+                        <p class="page-link" (click)="next()">&raquo;</p>
+                    </li>
                     } @else {
-                        <li class="page-item disabled">
-                            <p class="page-link">&raquo;</p>
-                        </li>
+                    <li class="page-item disabled">
+                        <p class="page-link">&raquo;</p>
+                    </li>
                     }
                 </ul>
             </div>
         </ng-container>
         <ng-template #noContent>
-            <p class="text-center text-danger h2">You don't have any link</p>
+            <p class="text-center text-danger h2">You don't have any links yet</p>
         </ng-template>
     </ng-container>
 </div>

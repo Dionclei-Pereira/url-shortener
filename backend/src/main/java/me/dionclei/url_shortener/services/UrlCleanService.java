@@ -14,8 +14,9 @@ public class UrlCleanService {
 		this.urlService = urlService;
 	}
 	
-	@Scheduled(cron = "0 0 * * * *")
+	@Scheduled(cron = "0 0,30 * * * *")
 	public void clean() {
+		System.out.println("Cleaning URLs");
 		urlService.clean();
 	}
 }
